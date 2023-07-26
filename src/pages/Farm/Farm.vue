@@ -83,7 +83,7 @@
 <script>
   import LTable from '@/components/Table.vue'
   import Card from '@/components/Cards/Card.vue'
-  import {mapState} from "vuex";
+  import {mapActions, mapState} from "vuex";
   import MyTable from "@/components/MyTable";
   import Overview from "@/pages/Overview";
   import StatsCard from "@/components/Cards/StatsCard";
@@ -103,9 +103,9 @@
     },
     computed: {
       ...mapState({
-        tableData: state => state.tableData,
-        columns: state => state.columns,
-        sortConfig: state => state.sortConfig,
+        tableData: state => state.farm.tableData,
+        columns: state => state.farm.columns,
+        sortConfig: state => state.farm.sortConfig,
       }),
     },
     data() {

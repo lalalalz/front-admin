@@ -1,45 +1,41 @@
-import getFarms from "@/api/farm";
+import Farm from "@/api/farm";
 
-const farm = {
+export default {
   namespace: true,
   state: {
+    tableData: [],
     columns: [],
-    data: [],
-    formData: {
-      farmId: "",
-      memberId: "",
-      address: "",
-      description: ""
-    }
+    sortConfig: {},
   },
   getters: {
     getColumns(state, getters, rootState) {
       return state.columns;
     },
-    getData(state, getters, rootState) {
-      return state.data;
+    getTableData(state, getters, rootState) {
+      return state.tableData;
     },
+    getSortConfig(state, getters, rootState) {
+      return state.sortConfig;
+    }
   },
   mutations: {
     setColumns(state, columns) {
       state.columns = columns;
     },
-    setData(state, data) {
-      state.data = data;
+    setTableData(state, data) {
+      state.tableData = data;
     },
-    setFormData(state, formData) {
-      state.formData = formData;
-    },
+    setSortConfig(state, config) {
+      state.config = config;
+    }
   },
   actions: {
-    async init(context, value) {
-      let farmData = await getFarms();
-      console.log("farmData : {}", farmData);
+    async initTable(context, value) {
+      let {columns, tableData} = await Farm.getFarms();
 
-      context.commit("setColumns", farmData.columns);
-      context.commit("setData", farmData.data);
+      context.commit("setColumns", columns);
+      context.commit("setTableData", tableData);
+      context.commit("setSortConfig", {prop: "farmId"});
     },
   }
 }
-
-export default farm;
