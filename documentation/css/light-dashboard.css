@@ -6952,6 +6952,7 @@ star {
 
 .table {
   border-collapse: inherit;
+  overflow-y: auto; /* 세로 스크롤을 보이도록 설정합니다. */
 }
 .table thead tr > th,
 .table thead tr > td,

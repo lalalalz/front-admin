@@ -23,10 +23,16 @@ import LightBootstrap from "./light-bootstrap-main";
 // router setup
 import routes from "./routes/routes";
 
+// Vuex setup
+import store from "./store";
+import Element from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
+
 import "./registerServiceWorker";
 // plugin setup
 Vue.use(VueRouter);
 Vue.use(LightBootstrap);
+Vue.use(Element);
 
 // configure router
 const router = new VueRouter({
@@ -46,4 +52,5 @@ new Vue({
   el: "#app",
   render: (h) => h(App),
   router,
+  store,
 });

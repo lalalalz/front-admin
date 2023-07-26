@@ -1,5 +1,5 @@
 <template>
-  <table class="table">
+  <table class="table table-overflow">
     <thead>
       <slot name="columns">
         <tr>
@@ -8,7 +8,7 @@
       </slot>
     </thead>
     <tbody>
-    <tr v-for="(item, index) in data" :key="index">
+    <tr v-for="(item, index) in data" :key="index" @click="getFormData($event, item)">
       <slot :row="item">
         <td v-for="column in columns" :key="column" v-if="hasValue(item, column)">{{itemValue(item, column)}}</td>
       </slot>
@@ -25,13 +25,20 @@
     },
     methods: {
       hasValue (item, column) {
-        return item[column.toLowerCase()] !== 'undefined'
+        return item[column] !== 'undefined'
       },
       itemValue (item, column) {
-        return item[column.toLowerCase()]
+        return item[column]
+      },
+      getFormData(event, data) {
+        this.$store.commit("setFormData", data);
       }
     }
   }
 </script>
 <style>
+.table-overflow {
+  height: 120px;
+  overflow-y: auto;
+}
 </style>
